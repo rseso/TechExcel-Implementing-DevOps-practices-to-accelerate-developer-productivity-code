@@ -39,9 +39,9 @@
         # https://github.com/azure/login
       - uses: azure/login@v1
         with:
-          client-id: $ {{secrets.AZURE_CLIENT_ID}}
-          tenant-id: $ {{secrets.AZURE_TENANT_ID}}
-          subscription-id: $ {{secrets.AZURE_SUBSCRIPTION_ID}}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           # We also need to ensure that enable-AzPSSession is true. This is important for
           # using OIDC in Azure. If we were to pass in a client secret instead, we would not need
           # this setting enabled
@@ -52,8 +52,8 @@
         # https://github.com/azure/arm-deploy
         uses: azure/arm-deploy@v1
         with:
-          subscriptionId: $ {{secrets.AZURE_SUBSCRIPTION_ID}}
-          resourceGroupName: $ {{secrets.AZURE_RESOURCE_GROUP}}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template: ./InfrastructureAsCode/main.bicep
           # Use the environment variable called targetEnv
-          parameters: environment=$ {{secrets.targetEnv}}
+          parameters: environment=${{ env.targetEnv }}
